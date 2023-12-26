@@ -3,12 +3,14 @@ subtract = (a, b) => a - b;
 multiply = (a, b) => a * b;
 divide = (a, b) => a/b;
 
-let firstNumber = 0;
+let firstNumber;
 let operator;
 let lastNumber;
 
 const arithmeticOperators = "+-*/";
 const maxDisplayLength = 10;
+
+let isFirstNumber = true;
 
 function operate(operator, number1, number2) {
     let result;
@@ -45,23 +47,51 @@ function displayValue(value) {
     display.textContent += value;
 }
 
+function clearSelectedOperator() {
+    previousButton = document.getElementById(operator);
+    previousButton.classList.remove("selected");
+}
+
+function performEqualsOperation() {
+    if (isFirstNumber) return;
+
+    lastNumber = +display.textContent;
+    console.log(firstNumber, lastNumber, operator);
+    let result = operate(operator, firstNumber, lastNumber);
+
+    firstNumber = result;
+
+    display.textContent = "";
+    displayValue(firstNumber);
+    isFirstNumber = true;
+}
+
 function getOperator(event) {
-    if (operator) {
-        previousButton = document.getElementById(operator);
-        previousButton.classList.remove("selected");
-    }
+    if (operator) clearSelectedOperator();
+
+    if (event.currentTarget.id === "=") performEqualsOperation();
 
     operator = event.currentTarget.id;
 
     if (arithmeticOperators.includes(operator)) {
         event.currentTarget.classList.add("selected");
     }
+
+    firstNumber = +display.textContent;
 }
 
 function storeValue(event) {
     if (display.textContent.length > maxDisplayLength){
         alert("Exceeded max display length");
         return;
+    }
+
+    if (operator && isFirstNumber) {
+        firstNumber = +display.textContent;
+        display.textContent = "";
+        displayValue(0);
+        clearSelectedOperator();
+        isFirstNumber = false;
     }
 
     if (event.currentTarget.id === ".") {
