@@ -7,7 +7,7 @@ let firstNumber = 0;
 let operator;
 let lastNumber;
 
-const operators = "+-*/";
+const arithmeticOperators = "+-*/";
 const maxDisplayLength = 10;
 
 function operate(operator, number1, number2) {
@@ -37,11 +37,25 @@ function operate(operator, number1, number2) {
 
 const numberButtons = document.querySelectorAll("button.number");
 const display = document.querySelector("#display");
+const operatorButtons = document.querySelectorAll("button.operator");
 
 function displayValue(value) {
     if (display.textContent === "0") display.textContent = "";
    
     display.textContent += value;
+}
+
+function getOperator(event) {
+    if (operator) {
+        previousButton = document.getElementById(operator);
+        previousButton.classList.remove("selected");
+    }
+
+    operator = event.currentTarget.id;
+
+    if (arithmeticOperators.includes(operator)) {
+        event.currentTarget.classList.add("selected");
+    }
 }
 
 function storeValue(event) {
@@ -59,4 +73,8 @@ function storeValue(event) {
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", storeValue);
+});
+
+operatorButtons.forEach((button) => {
+    button.addEventListener("click", getOperator);
 });
