@@ -6,7 +6,9 @@ divide = (a, b) => a/b;
 let firstNumber = 0;
 let operator;
 let lastNumber;
+
 const operators = "+-*/";
+const maxDisplayLength = 10;
 
 function operate(operator, number1, number2) {
     let result;
@@ -40,5 +42,17 @@ function displayValue(value) {
     if (display.textContent === "0") display.textContent = "";
    
     display.textContent += value;
-
 }
+
+function storeValue(event) {
+    if (display.textContent.length > maxDisplayLength){
+        alert("Exceeded max display length");
+        return;
+    }
+    
+    displayValue(event.currentTarget.id);
+}
+
+numberButtons.forEach((button) => {
+    button.addEventListener("click", storeValue);
+});
