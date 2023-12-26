@@ -3,13 +3,14 @@ subtract = (a, b) => a - b;
 multiply = (a, b) => a * b;
 divide = (a, b) => a/b;
 
-let firstNumber;
+let firstNumber = 0;
 let operator;
 let lastNumber;
+const operators = "+-*/";
 
 function operate(operator, number1, number2) {
     let result;
-    
+
     switch (operator) {
         case "+":
             result = number1 + number2;
@@ -30,4 +31,14 @@ function operate(operator, number1, number2) {
     }
 
     return result;
+}
+
+const numberButtons = document.querySelectorAll("button.number");
+const display = document.querySelector("#display");
+
+function displayValue(value) {
+    if (display.textContent === "0") display.textContent = "";
+   
+    display.textContent += value;
+
 }
