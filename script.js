@@ -49,6 +49,10 @@ function storeValue(event) {
         alert("Exceeded max display length");
         return;
     }
+
+    if (event.currentTarget.id === ".") {
+        if (display.textContent.includes(".")) return;
+    }
     
     displayValue(event.currentTarget.id);
 }
