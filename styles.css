@@ -10,7 +10,7 @@ body {
     padding: 0.5em;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 500px;
     border-radius: 10px;
 }
 
