@@ -12,6 +12,10 @@ const maxDisplayLength = 10;
 
 let isFirstNumber = true;
 
+function round(number, decimalPlaces) {
+    return Math.round(number * (10 ** decimalPlaces))/(10**decimalPlaces);
+}
+
 function operate(operator, number1, number2) {
     let result;
 
@@ -34,12 +38,13 @@ function operate(operator, number1, number2) {
             break;    
     }
 
-    return result;
+    return round(result, maxDisplayLength - 3);
 }
 
 const numberButtons = document.querySelectorAll("button.number");
 const display = document.querySelector("#display");
 const operatorButtons = document.querySelectorAll("button.operator");
+const clearButton = document.querySelector("#clear");
 
 function displayValue(value) {
     if (display.textContent === "0") display.textContent = "";
@@ -47,9 +52,10 @@ function displayValue(value) {
     display.textContent += value;
 }
 
-function clearSelectedOperator() {
+function clearSelectedOperator(setNull = false) {
     previousButton = document.getElementById(operator);
     previousButton.classList.remove("selected");
+    if (setNull) operator = null;
 }
 
 function performEqualsOperation() {
@@ -64,6 +70,14 @@ function performEqualsOperation() {
     display.textContent = "";
     displayValue(firstNumber);
     isFirstNumber = true;
+    clearSelectedOperator(true);
+}
+
+function clearDisplay() {
+    display.textContent = "";
+    displayValue(0);
+    isFirstNumber = true;
+    clearSelectedOperator(true);
 }
 
 function getOperator(event) {
@@ -108,3 +122,5 @@ numberButtons.forEach((button) => {
 operatorButtons.forEach((button) => {
     button.addEventListener("click", getOperator);
 });
+
+clearButton.addEventListener("click", clearDisplay);
