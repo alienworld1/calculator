@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     width: 500px;
     border-radius: 10px;
+    min-width: 400px;
 }
 
 #display {
@@ -48,4 +49,8 @@ button.operator {
 
 button.clear {
     background-color: #922B21;
+}
+
+button.selected {
+    background-color: #2980b9;
 }
