@@ -63,7 +63,7 @@ function performEqualsOperation() {
 
     lastNumber = +display.textContent;
     
-    if (operator === "/") {
+    if (operator === "/" && lastNumber === 0) {
         alert("Cannot divide by 0!");
         display.textContent = "";
         displayValue(0);
@@ -116,6 +116,12 @@ function getOperator(event) {
 }
 
 function storeValue(event) {
+
+    if (operator === "=") {
+        clearDisplay();
+        operator = null;
+    }
+
     if (display.textContent.length > maxDisplayLength){
         alert("Exceeded max display length");
         return;
