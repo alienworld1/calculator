@@ -62,7 +62,16 @@ function performEqualsOperation() {
     if (isFirstNumber) return;
 
     lastNumber = +display.textContent;
-    console.log(firstNumber, lastNumber, operator);
+    
+    if (operator === "/") {
+        alert("Cannot divide by 0!");
+        display.textContent = "";
+        displayValue(0);
+        isFirstNumber = true;
+        clearSelectedOperator(true);
+        return;            
+    }
+
     let result = operate(operator, firstNumber, lastNumber);
 
     firstNumber = result;
@@ -111,8 +120,8 @@ function storeValue(event) {
         alert("Exceeded max display length");
         return;
     }
-
-    if (operator && isFirstNumber) {
+    
+    if ((operator && isFirstNumber) && operator != "=") {
         firstNumber = +display.textContent;
         display.textContent = "";
         displayValue(0);
