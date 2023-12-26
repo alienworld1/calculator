@@ -4,3 +4,20 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+#calculator {
+    background-color: gray;
+    padding: 0.15em;
+    display: flex;
+    flex-direction: column;
+}
+
+#display {
+    background-color: #44E287;
+    padding: 0.15em;
+    margin: 0.15em;
+    text-align: right;
+    font-size: 64px;
+    border-radius: 10px;
+    font-family: monospace;
+}
