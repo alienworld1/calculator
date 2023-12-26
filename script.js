@@ -80,10 +80,22 @@ function clearDisplay() {
     clearSelectedOperator(true);
 }
 
+function signChangeOperation() {
+    let number = +display.textContent * -1;
+    display.textContent = "";
+    display.textContent = number;
+}
+
 function getOperator(event) {
     if (operator) clearSelectedOperator();
 
     if (event.currentTarget.id === "=") performEqualsOperation();
+
+    if (event.currentTarget.id === "+/-") {
+        signChangeOperation();
+        return;
+    }
+
 
     operator = event.currentTarget.id;
 
